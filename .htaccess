@@ -1,0 +1,50 @@
+# ============================================
+# .htaccess — Website Jasa Programmer
+# ============================================
+
+# ============ KEAMANAN ============
+# Blokir akses ke file sensitif
+<FilesMatch "\.(sql|md|log|ini|env|bak|old|txt)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Blokir akses ke file .htaccess sendiri
+<Files ".htaccess">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Cegah directory listing
+Options -Indexes
+
+# ============ URL REWRITING ============
+RewriteEngine On
+RewriteBase /website-jasa/
+
+# Blokir akses langsung ke folder sensitif
+RewriteRule ^config/ - [F,L]
+RewriteRule ^includes/ - [F,L]
+
+# ---------- PESANAN (HARUS DI ATAS rule /pesan/) ----------
+RewriteRule ^pesan/sukses/?$  pages/pesan_sukses.php  [L,QSA]
+RewriteRule ^pesan/cek/?$     pages/pesan_cek.php     [L,QSA]
+RewriteRule ^pesan/proses/?$  pages/pesan_proses.php  [L,QSA]
+RewriteRule ^pesan/?$         pages/pesan.php         [L,QSA]
+
+# ---------- HALAMAN STATIS ----------
+RewriteRule ^layanan/?$    pages/layanan.php    [L,QSA]
+RewriteRule ^portfolio/?$  pages/portfolio.php  [L,QSA]
+RewriteRule ^artikel/?$    pages/artikel.php    [L,QSA]
+RewriteRule ^tentang/?$    pages/tentang.php    [L,QSA]
+RewriteRule ^kontak/?$     pages/kontak.php     [L,QSA]
+
+# ---------- HALAMAN DETAIL (DINAMIS) ----------
+RewriteRule ^layanan/([a-z0-9-]+)/?$    pages/layanan_detail.php?slug=$1    [L,QSA]
+RewriteRule ^portfolio/([a-z0-9-]+)/?$  pages/portfolio_detail.php?slug=$1  [L,QSA]
+RewriteRule ^artikel/([a-z0-9-]+)/?$    pages/artikel_detail.php?slug=$1    [L,QSA]
+
+# ---------- FALLBACK 404 (opsional) ----------
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule ^(.*)$ index.php [L,QSA]
