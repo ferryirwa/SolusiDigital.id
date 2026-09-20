@@ -98,7 +98,7 @@ if ($mode === 'edit' && $id > 0) {
                 status = ? 
             WHERE id = ?";
     $stmt = $koneksi->prepare($sql);
-    $stmt->bind_param('ssssiisii', 
+    $stmt->bind_param('ssssisisi', 
         $nama, $slug, $deskripsi_singkat, $deskripsi_lengkap, 
         $harga_mulai, $icon, $urutan, $status, $id
     );
@@ -116,7 +116,7 @@ if ($mode === 'edit' && $id > 0) {
                 (nama, slug, deskripsi_singkat, deskripsi_lengkap, harga_mulai, icon, urutan, status) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $koneksi->prepare($sql);
-    $stmt->bind_param('sssssiss', 
+    $stmt->bind_param('ssssisiss', 
         $nama, $slug, $deskripsi_singkat, $deskripsi_lengkap, 
         $harga_mulai, $icon, $urutan, $status
     );

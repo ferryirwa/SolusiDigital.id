@@ -66,8 +66,8 @@ require_once '../includes/header.php';
 
             <!-- Form -->
             <div class="col-lg-8">
-                <div class="card-service">
-                    <h4 class="mb-1">Form Pemesanan</h4>
+                <div class="card-service card-service-form">
+                    <h4>Form Pemesanan</h4>
                     <p class="text-muted small mb-4">
                         Isi data di bawah dengan lengkap. Tanda <span class="text-danger">*</span> wajib diisi.
                     </p>

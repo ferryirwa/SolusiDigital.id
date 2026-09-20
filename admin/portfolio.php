@@ -22,7 +22,7 @@ $where_sql = $where ? 'WHERE ' . implode(' AND ', $where) : '';
 // Query portfolio dengan error handling
 $query = $koneksi->query("SELECT * FROM portfolio $where_sql ORDER BY created_at DESC");
 if (!$query) {
-    die('<div style="padding:20px;font-family:sans-serif;">
+    die('<div style="padding:20px;font-family:Inter,sans-serif;">
         <h3 style="color:red;">Error Query Portfolio</h3>
         <p><strong>Pesan:</strong> ' . htmlspecialchars($koneksi->error) . '</p>
         <p><strong>Query:</strong> SELECT * FROM portfolio ' . htmlspecialchars($where_sql) . ' ORDER BY created_at DESC</p>

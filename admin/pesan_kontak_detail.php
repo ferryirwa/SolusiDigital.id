@@ -121,14 +121,14 @@ if ($m['status'] === 'belum') {
 
                     <div class="d-grid gap-2">
                         <a href="mailto:<?= htmlspecialchars($m['email']) ?>?subject=Re: <?= htmlspecialchars($m['subjek'] ?: 'Pesan Anda') ?>"
-                           class="btn btn-primary">
-                            <i class="bi bi-reply-fill"></i> Balas Email
+                           class="btn btn-primary btn-lg">
+                            <i class="bi bi-envelope-open-fill"></i> Balas Email
                         </a>
-                        <a href="pesan_kontak.php" class="btn btn-outline-secondary">
+                        <a href="pesan_kontak.php" class="btn btn-outline-secondary btn-lg">
                             <i class="bi bi-arrow-left"></i> Kembali
                         </a>
                         <a href="pesan_kontak_hapus.php?id=<?= $m['id'] ?>"
-                           class="btn btn-outline-danger"
+                           class="btn btn-outline-danger btn-lg"
                            onclick="return confirm('Yakin hapus pesan ini?')">
                             <i class="bi bi-trash"></i> Hapus Pesan
                         </a>

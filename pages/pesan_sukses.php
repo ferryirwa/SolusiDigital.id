@@ -26,6 +26,9 @@ if (!empty($pesanan['layanan_id'])) {
 
 $page_title = 'Pesanan Berhasil — ' . SITE_NAME;
 
+// Header di-include lebih dulu supaya $pengaturan (whatsapp) tersedia
+require_once '../includes/header.php';
+
 // Pesan WhatsApp otomatis ke admin
 $pesan_wa = "Halo Admin " . SITE_NAME . ",\n\n"
           . "Saya baru saja melakukan pemesanan:\n"
@@ -39,7 +42,7 @@ $pesan_wa = "Halo Admin " . SITE_NAME . ",\n\n"
 
 $wa_link = link_wa($pengaturan['whatsapp'], $pesan_wa);
 
-require_once '../includes/header.php';
+// (header.php sudah di-include di atas)
 ?>
 
 <section class="section" style="padding-top: 140px;">
@@ -76,7 +79,7 @@ require_once '../includes/header.php';
                 </div>
 
                 <!-- Detail Pesanan -->
-                <div class="card-service mb-4">
+                <div class="card-service card-service-sm mb-4">
                     <h5 class="mb-3">
                         <i class="bi bi-receipt text-primary"></i> Detail Pesanan
                     </h5>

@@ -21,7 +21,7 @@ CREATE TABLE admin (
 
 -- Password default: admin123 (hash bcrypt)
 INSERT INTO admin (username, password, nama, email, role) VALUES
-('admin', '$2y$10$e0MYzXyjpJS7Pd0RVvHwHe1HcGX5BTsTzWQx4bD1t5Z8zWQx4bD1t', 'Administrator', 'admin@website.com', 'super');
+('admin', '$2y$10$jRQR2QFRqiPE79zF7/tKyeN8ZuwAkZRkiuOf0zPfzED.AD41A7yam', 'Administrator', 'admin@website.com', 'super');
 
 -- ============================================
 -- TABEL: layanan
@@ -61,6 +61,7 @@ CREATE TABLE pesanan (
   budget INT DEFAULT 0,
   deskripsi TEXT,
   file_lampiran VARCHAR(255) DEFAULT NULL,
+  target_selesai DATE DEFAULT NULL,
   status ENUM('baru','proses','selesai','batal') DEFAULT 'baru',
   catatan_admin TEXT DEFAULT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

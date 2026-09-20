@@ -30,6 +30,9 @@ $halaman = basename($_SERVER['PHP_SELF'], '.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= ucfirst($halaman) ?> — Admin <?= SITE_NAME ?></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
@@ -43,10 +46,13 @@ $halaman = basename($_SERVER['PHP_SELF'], '.php');
         * { box-sizing: border-box; }
         body {
             background: #f4f6f9;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 14px;
             min-height: 100vh;
             margin: 0;
             transition: padding-left 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* ============ SIDEBAR ============ */
@@ -110,7 +116,7 @@ $halaman = basename($_SERVER['PHP_SELF'], '.php');
             padding: 18px 20px 8px;
             color: rgba(255,255,255,0.4);
             letter-spacing: 1.2px;
-            font-weight: 600;
+            font-weight: 700;
             white-space: nowrap;
             overflow: hidden;
             transition: all 0.3s ease;
@@ -126,6 +132,7 @@ $halaman = basename($_SERVER['PHP_SELF'], '.php');
             text-decoration: none;
             transition: all 0.2s;
             font-size: 14px;
+            font-weight: 500;
             border-left: 3px solid transparent;
             position: relative;
             white-space: nowrap;
@@ -140,7 +147,7 @@ $halaman = basename($_SERVER['PHP_SELF'], '.php');
             background: rgba(13, 110, 253, 0.25);
             color: #fff;
             border-left-color: #FFC107;
-            font-weight: 600;
+            font-weight: 700;
         }
         .sidebar a i {
             font-size: 18px;
@@ -158,7 +165,7 @@ $halaman = basename($_SERVER['PHP_SELF'], '.php');
             font-size: 10px;
             padding: 3px 8px;
             border-radius: 10px;
-            font-weight: 600;
+            font-weight: 700;
             transition: all 0.3s ease;
         }
 
@@ -244,12 +251,13 @@ $halaman = basename($_SERVER['PHP_SELF'], '.php');
             transition: all 0.3s;
         }
         .topbar .page-title {
-            font-size: 20px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: 700;
             margin: 0;
             display: flex;
             align-items: center;
             gap: 10px;
+            color: var(--dark);
         }
         .topbar .user-info {
             display: flex;
@@ -265,7 +273,8 @@ $halaman = basename($_SERVER['PHP_SELF'], '.php');
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 16px;
         }
 
         /* ============ TOGGLE BUTTON ============ */

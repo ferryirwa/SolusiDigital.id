@@ -157,7 +157,7 @@ $total_dibaca = $koneksi->query("SELECT COUNT(*) as jml FROM pesan_kontak WHERE 
                                             </a>
                                             <a href="mailto:<?= htmlspecialchars($m['email']) ?>?subject=Re: <?= htmlspecialchars($m['subjek']) ?>"
                                                class="btn btn-primary" title="Balas Email">
-                                                <i class="bi bi-reply"></i>
+                                                <i class="bi bi-envelope"></i>
                                             </a>
                                             <a href="pesan_kontak_hapus.php?id=<?= $m['id'] ?>"
                                                class="btn btn-danger" title="Hapus"

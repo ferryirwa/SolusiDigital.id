@@ -84,11 +84,11 @@ $warna = [
                 </div>
                 <div class="d-flex gap-2">
                     <a href="<?= link_wa($p['whatsapp'], 'Halo ' . $p['nama_klien'] . ', terkait pesanan ' . $p['kode_pesanan'] . '...') ?>"
-                       target="_blank" class="btn btn-success">
+                       target="_blank" class="btn btn-success btn-lg">
                         <i class="bi bi-whatsapp"></i> Chat Klien
                     </a>
                     <a href="mailto:<?= htmlspecialchars($p['email']) ?>?subject=Balasan Pesanan <?= htmlspecialchars($p['kode_pesanan']) ?>"
-                       class="btn btn-primary">
+                       class="btn btn-primary btn-lg">
                         <i class="bi bi-envelope"></i> Email Klien
                     </a>
                 </div>
@@ -159,6 +159,14 @@ $warna = [
                             <small class="text-muted d-block">Budget Klien</small>
                             <div class="fw-bold text-primary fs-5"><?= rupiah($p['budget']) ?></div>
                         </div>
+                        <?php if (!empty($p['target_selesai'])): ?>
+                            <div class="col-md-6">
+                                <small class="text-muted d-block">Target Selesai</small>
+                                <div class="fw-semibold">
+                                    <i class="bi bi-calendar-check"></i> <?= tanggal_indo($p['target_selesai']) ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
 
                     <hr>

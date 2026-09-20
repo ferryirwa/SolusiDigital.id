@@ -78,7 +78,7 @@ require_once '../includes/header.php';
             </div>
 
             <div class="col-lg-4">
-                <div class="card-service mb-3">
+                <div class="card-service card-service-sm mb-3">
                     <h5>Artikel Lainnya</h5>
                     <hr>
                     <?php while ($al = $artikel_lain->fetch_assoc()): ?>
@@ -92,7 +92,7 @@ require_once '../includes/header.php';
                     <?php endwhile; ?>
                 </div>
 
-                <div class="card-service">
+                <div class="card-service card-service-sm">
                     <h5>Butuh Bantuan?</h5>
                     <p class="small text-muted">Konsultasi gratis untuk kebutuhan digital Anda.</p>
                     <a href="<?= BASE_URL ?>kontak" class="btn btn-primary w-100">

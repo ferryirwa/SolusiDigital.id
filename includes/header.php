@@ -25,11 +25,11 @@ if ($pengaturan_q && $pengaturan_q->num_rows > 0) {
 }
 
 // Fallback default kalau tabel pengaturan kosong / error
-// Fallback default kalau tabel pengaturan kosong / error
 /** @var array $pengaturan */
 if (empty($pengaturan) || !is_array($pengaturan)) {
     $pengaturan = [
         'nama_situs'       => defined('SITE_NAME') ? SITE_NAME : 'JasaProgrammer.id',
+        'logo'             => '',
         'deskripsi'        => defined('SITE_DESC') ? SITE_DESC : 'Jasa Pembuatan Website & Aplikasi',
         'whatsapp'         => '6281234567890',
         'email'            => 'info@website.com',
@@ -43,8 +43,11 @@ if (empty($pengaturan) || !is_array($pengaturan)) {
 
 // ============ META DINAMIS (bisa di-override sebelum include) ============
 $page_title = isset($page_title) ? $page_title : $pengaturan['nama_situs'];
-$page_desc  = isset($page_desc)  ? $page_desc  : $pengaturan['meta_description'];
-$page_img   = isset($page_img)   ? $page_img   : (defined('ASSETS_URL') ? ASSETS_URL . 'img/logo.png' : '');
+$page_desc  = isset($page_desc)  ? $page_desc  : ($pengaturan['meta_description'] ?? '');
+
+// Gambar OG: pakai logo yang diupload kalau ada, kalau tidak pakai favicon
+$logo_terpasang = !empty($pengaturan['logo']) ? UPLOADS_URL . 'logo/' . $pengaturan['logo'] : '';
+$page_img = isset($page_img) ? $page_img : ($logo_terpasang ?: ASSETS_URL . 'img/favicon.png');
 
 // ============ HALAMAN AKTIF ============
 $halaman_aktif = basename($_SERVER['PHP_SELF'], '.php');
@@ -65,7 +68,7 @@ if (strpos($request_uri, '/pesan') !== false) $halaman_aktif = 'pesan';
     <!-- SEO -->
     <title><?= htmlspecialchars($page_title) ?></title>
     <meta name="description" content="<?= htmlspecialchars($page_desc) ?>">
-    <meta name="keywords" content="<?= htmlspecialchars($pengaturan['meta_keyword']) ?>">
+    <meta name="keywords" content="<?= htmlspecialchars($pengaturan['meta_keyword'] ?? '') ?>">
     <meta name="author" content="<?= htmlspecialchars($pengaturan['nama_situs']) ?>">
     
     <!-- Open Graph -->

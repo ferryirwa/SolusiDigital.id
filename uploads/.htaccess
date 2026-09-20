@@ -4,13 +4,13 @@
     Deny from all
 </FilesMatch>
 
-# Hanya izinkan file gambar
+# Hanya izinkan file gambar & dokumen lampiran pesanan
 <FilesMatch ".*">
     Order Deny,Allow
     Deny from all
 </FilesMatch>
 
-<FilesMatch "\.(jpg|jpeg|png|gif|webp|svg)$">
+<FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|pdf|doc|docx|zip|rar)$">
     Order Allow,Deny
     Allow from all
 </FilesMatch>

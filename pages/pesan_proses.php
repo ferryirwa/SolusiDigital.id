@@ -33,10 +33,8 @@ if (empty($email)) {
     $errors[] = 'Format email tidak valid.';
 }
 
-// Bersihkan nomor WA
-$whatsapp = preg_replace('/[^0-9]/', '', $whatsapp);
-$whatsapp = ltrim($whatsapp, '0');
-$whatsapp = ltrim($whatsapp, '62');
+// Bersihkan nomor WA (format lokal tanpa 0/62, sesuai tampilan "+62" di form)
+$whatsapp = normalisasi_wa($whatsapp);
 if (empty($whatsapp)) {
     $errors[] = 'Nomor WhatsApp wajib diisi.';
 } elseif (strlen($whatsapp) < 8 || strlen($whatsapp) > 15) {
@@ -157,13 +155,13 @@ while ($max_loop > 0) {
 $target_final = !empty($target_selesai) ? $target_selesai : null;
 
 $sql = "INSERT INTO pesanan 
-            (kode_pesanan, nama_klien, email, whatsapp, layanan_id, budget, deskripsi, file_lampiran, status) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'baru')";
+            (kode_pesanan, nama_klien, email, whatsapp, layanan_id, budget, deskripsi, file_lampiran, target_selesai, status) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'baru')";
 
 $stmt = $koneksi->prepare($sql);
-$stmt->bind_param('ssssiiss', 
+$stmt->bind_param('ssssiisss', 
     $kode_pesanan, $nama_klien, $email, $whatsapp, 
-    $layanan_id, $budget, $deskripsi, $nama_lampiran
+    $layanan_id, $budget, $deskripsi, $nama_lampiran, $target_final
 );
 
 if (!$stmt->execute()) {

@@ -48,12 +48,12 @@ if (empty($email)) {
 if (empty($whatsapp)) {
     $errors[] = 'Nomor WhatsApp wajib diisi.';
 } else {
-    $whatsapp = preg_replace('/[^0-9]/', '', $whatsapp);
-    $whatsapp = ltrim($whatsapp, '0');
-    $whatsapp = ltrim($whatsapp, '62');
+    // Normalisasi lalu simpan dalam format 62xxxxxxxxxx
+    $whatsapp = normalisasi_wa($whatsapp);
     if (strlen($whatsapp) < 8 || strlen($whatsapp) > 15) {
         $errors[] = 'Nomor WhatsApp tidak valid (8-15 digit).';
     }
+    $whatsapp = '62' . $whatsapp;
 }
 
 if (!empty($facebook) && !filter_var($facebook, FILTER_VALIDATE_URL)) {

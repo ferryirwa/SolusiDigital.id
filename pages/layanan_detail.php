@@ -93,11 +93,11 @@ require_once '../includes/header.php';
                 <div class="row g-4">
                     <?php while ($ll = $layanan_lain->fetch_assoc()): ?>
                         <div class="col-lg-3 col-md-6">
-                            <div class="card-service">
-                                <div class="icon" style="width: 50px; height: 50px; font-size: 24px;">
+                            <div class="card-service card-service-sm">
+                                <div class="icon">
                                     <i class="bi <?= htmlspecialchars($ll['icon']) ?>"></i>
                                 </div>
-                                <h5 class="mt-2" style="font-size: 1rem;"><?= htmlspecialchars($ll['nama']) ?></h5>
+                                <h5><?= htmlspecialchars($ll['nama']) ?></h5>
                                 <a href="<?= BASE_URL ?>layanan/<?= $ll['slug'] ?>" class="btn btn-sm btn-outline-primary mt-2">
                                     Lihat
                                 </a>

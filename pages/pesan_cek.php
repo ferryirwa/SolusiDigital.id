@@ -75,7 +75,7 @@ require_once '../includes/header.php';
 
                 <!-- Hasil -->
                 <?php if ($not_found): ?>
-                    <div class="card-service text-center" style="border: 2px solid #dc3545;">
+                    <div class="card-service card-service-sm text-center" style="border: 2px solid #dc3545;">
                         <i class="bi bi-x-circle text-danger" style="font-size: 60px;"></i>
                         <h4 class="mt-3">Pesanan Tidak Ditemukan</h4>
                         <p class="text-muted">

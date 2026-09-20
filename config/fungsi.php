@@ -15,7 +15,8 @@
 function clean(mysqli $koneksi, string $data): string {
     $data = trim($data);
     $data = stripslashes($data);
-    $data = htmlspecialchars($data);
+    // Catatan: jangan pakai htmlspecialchars di sini supaya data tidak
+    // ter-encode dua kali. Escaping untuk tampilan dilakukan saat output.
     return $koneksi->real_escape_string($data);
 }
 
@@ -65,10 +66,27 @@ function tanggal_indo(string $tanggal): string {
  */
 function generate_kode_pesanan(mysqli $koneksi): string {
     $tgl = date('Ymd');
-    $q = $koneksi->query("SELECT COUNT(*) as total FROM pesanan WHERE DATE(created_at) = CURDATE()");
-    $data = $q ? $q->fetch_assoc() : ['total' => 0];
-    $urut = str_pad($data['total'] + 1, 3, '0', STR_PAD_LEFT);
-    return 'ORD-' . $tgl . '-' . $urut;
+    $prefix = 'ORD-' . $tgl . '-';
+
+    // Ambil urutan terakhir hari ini (bukan COUNT, supaya tidak bentrok
+    // kalau ada data pesanan yang dihapus)
+    $urut = 1;
+    $q = $koneksi->query("SELECT kode_pesanan FROM pesanan WHERE kode_pesanan LIKE '$prefix%' ORDER BY kode_pesanan DESC LIMIT 1");
+    if ($q && $q->num_rows > 0) {
+        $urut = (int)substr($q->fetch_assoc()['kode_pesanan'], -3) + 1;
+    }
+
+    // Pastikan kode benar-benar belum terpakai
+    do {
+        $kode = $prefix . str_pad($urut, 3, '0', STR_PAD_LEFT);
+        $cek = $koneksi->query("SELECT id FROM pesanan WHERE kode_pesanan = '" . $koneksi->real_escape_string($kode) . "' LIMIT 1");
+        if (!$cek || $cek->num_rows === 0) {
+            return $kode;
+        }
+        $urut++;
+    } while ($urut <= 9999);
+
+    return $prefix . str_pad($urut, 3, '0', STR_PAD_LEFT);
 }
 
 /**
@@ -180,13 +198,37 @@ function potong_teks(string $teks, int $panjang = 100): string {
 }
 
 /**
+ * Normalisasi nomor WhatsApp ke format lokal Indonesia
+ * (tanpa kode negara 62 dan tanpa 0 di depan)
+ *
+ * @param string $nomor
+ * @return string
+ */
+function normalisasi_wa(string $nomor): string {
+    $nomor = preg_replace('/[^0-9]/', '', $nomor);
+    if (strpos($nomor, '62') === 0) {
+        $nomor = substr($nomor, 2);
+    }
+    if (strpos($nomor, '0') === 0) {
+        $nomor = substr($nomor, 1);
+    }
+    return $nomor;
+}
+
+/**
  * Buat link WhatsApp
  * 
- * @param string $nomor Nomor WA (dengan atau tanpa 62)
+ * @param string $nomor Nomor WA (boleh dengan atau tanpa 62/0)
  * @param string $pesan Pesan otomatis
  * @return string
  */
 function link_wa(string $nomor, string $pesan = ''): string {
-    $nomor = preg_replace('/[^0-9]/', '', $nomor);
+    $nomor = normalisasi_wa($nomor);
+
+    // Tambahkan kode negara Indonesia kalau masih nomor lokal
+    if ($nomor !== '' && $nomor[0] === '8') {
+        $nomor = '62' . $nomor;
+    }
+
     return 'https://wa.me/' . $nomor . ($pesan ? '?text=' . urlencode($pesan) : '');
 }

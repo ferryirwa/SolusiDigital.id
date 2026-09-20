@@ -59,39 +59,39 @@ require_once '../includes/header.php';
         <div class="row g-4">
             <!-- Info Kontak -->
             <div class="col-lg-4">
-                <div class="card-service mb-3">
-                    <div class="icon" style="width: 55px; height: 55px; font-size: 24px;">
+                <div class="card-service card-service-info">
+                    <div class="icon">
                         <i class="bi bi-geo-alt"></i>
                     </div>
-                    <h5 class="mt-2">Alamat</h5>
+                    <h5>Alamat</h5>
                     <p class="small mb-0"><?= htmlspecialchars($pengaturan['alamat']) ?></p>
                 </div>
 
-                <div class="card-service mb-3">
-                    <div class="icon" style="width: 55px; height: 55px; font-size: 24px;">
+                <div class="card-service card-service-info">
+                    <div class="icon">
                         <i class="bi bi-envelope"></i>
                     </div>
-                    <h5 class="mt-2">Email</h5>
+                    <h5>Email</h5>
                     <a href="mailto:<?= htmlspecialchars($pengaturan['email']) ?>" class="small">
                         <?= htmlspecialchars($pengaturan['email']) ?>
                     </a>
                 </div>
 
-                <div class="card-service mb-3">
-                    <div class="icon" style="width: 55px; height: 55px; font-size: 24px;">
+                <div class="card-service card-service-info">
+                    <div class="icon">
                         <i class="bi bi-whatsapp"></i>
                     </div>
-                    <h5 class="mt-2">WhatsApp</h5>
+                    <h5>WhatsApp</h5>
                     <a href="<?= link_wa($pengaturan['whatsapp']) ?>" target="_blank" class="small text-success">
                         <?= htmlspecialchars($pengaturan['whatsapp']) ?>
                     </a>
                 </div>
 
-                <div class="card-service">
-                    <div class="icon" style="width: 55px; height: 55px; font-size: 24px;">
+                <div class="card-service card-service-info">
+                    <div class="icon">
                         <i class="bi bi-clock"></i>
                     </div>
-                    <h5 class="mt-2">Jam Operasional</h5>
+                    <h5>Jam Operasional</h5>
                     <p class="small mb-0">
                         Senin - Jumat: 09.00 - 18.00 WIB<br>
                         Sabtu: 09.00 - 14.00 WIB<br>
@@ -102,7 +102,7 @@ require_once '../includes/header.php';
 
             <!-- Form -->
             <div class="col-lg-8">
-                <div class="card-service">
+                <div class="card-service card-service-form">
                     <h4>Kirim Pesan</h4>
                     <p class="text-muted small mb-4">
                         Isi form di bawah, kami akan merespons dalam 1×24 jam.
@@ -145,10 +145,10 @@ require_once '../includes/header.php';
 
         <!-- Maps -->
         <div class="mt-5">
-            <div class="card-service p-0 overflow-hidden">
+            <div class="card-service card-service-map">
                 <iframe 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.5!2d106.8!3d-6.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTInMDAuMCJTIDEwNsKwNDgnMDAuMCJF!5e0!3m2!1sid!2sid!4v1234567890" 
-                    width="100%" height="400" style="border:0; display: block;" 
+                    width="100%" height="400" 
                     allowfullscreen="" loading="lazy">
                 </iframe>
             </div>
